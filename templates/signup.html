@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+
+<body>
+    <div class="tall-box">
+        <div class="entry-title">Personal Blog</div>
+
+        <form action="/admin/signup" method="POST" class="form">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" class="textfield" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" class="textfield" required>
+            </div>
+
+            <button type="submit" class="form-button">Sign up</button>
+
+            <div class="form-group">
+                <p>Already have an account? <a href="{{ url_for('admin_login') }}" class="signup-link">Log in</a></p>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const flashMessage = '{{ get_flashed_messages(with_categories=false)|last }}';
+            if (flashMessage) {
+                alert(flashMessage);
+            }
+        });
+    </script>
+</body>
+
+</html>
