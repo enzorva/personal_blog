@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Admin</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+
+<body>
+    <div class="tall-box">
+        <div class="entry-title-left">Choose a Creator</div>
+        <div style="margin: 20px;">
+            {% for admin in admins %}
+            <div style="margin-bottom: 10px;">
+                <button class="text-button" style="font-size: 20px;"
+                    onclick="location.href='{{ url_for('home', admin_id=admin['id']) }}';">
+                    {{ admin['username'] }}
+                </button>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+</html>

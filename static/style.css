@@ -92,6 +92,7 @@ body {
     border: 3.5px solid #000;
     border-radius: 5px;
     box-sizing: border-box;
+    font-family: 'Comic Sans MS', 'Comic Sans', cursive;
 }
 
 .textfield::placeholder {
@@ -119,6 +120,7 @@ body {
     padding: 15px 30px;
     font-size: 18px;
     font-weight: bold;
+    font-family: 'Comic Sans MS', 'Comic Sans', cursive;
     color: #000;
     background-color: #fff;
     border: 3.5px solid #000;
@@ -152,7 +154,7 @@ body {
     font-weight: bold;
     cursor: pointer;
     padding: 0;
-    opacity: 0.7;
+    opacity: 0.4;
     transition: opacity 0.3s ease;
 }
 

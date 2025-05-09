@@ -1,11 +1,17 @@
 import sqlite3
 import logging
 from flask import Flask, render_template, redirect, url_for, request, flash, session
+from datetime import datetime
 
 logging.basicConfig(level=logging.DEBUG)
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'  # Required for flashing messages
+app.secret_key = 'your_secret_key'  
+
+@app.template_filter('long_date')
+def long_date_filter(value):
+    date_obj = datetime.strptime(value, '%Y-%m-%d')
+    return date_obj.strftime('%B %d, %Y')
 
 def get_db_connection():
     conn = sqlite3.connect('database.db')
@@ -15,6 +21,36 @@ def get_db_connection():
 @app.route('/')
 def entry():
     return render_template('entry.html')
+
+@app.route('/home', defaults={'admin_id': None})
+@app.route('/home/<int:admin_id>')
+def home(admin_id):
+    if admin_id is None:
+        return redirect(url_for('choose_admin'))
+
+    conn = get_db_connection()
+    articles = conn.execute('SELECT * FROM articles WHERE user_id = ?', (admin_id,)).fetchall()
+    conn.close()
+    return render_template('guest_section/home.html', articles=articles)
+
+@app.route('/choose_admin')
+def choose_admin():
+    conn = get_db_connection()
+    admins = conn.execute('SELECT id, username FROM users').fetchall()
+    conn.close()
+    return render_template('guest_section/choose_admin.html', admins=admins)
+
+@app.route('/view_article/<int:article_id>')
+def view_article(article_id):
+    conn = get_db_connection()
+    article = conn.execute('SELECT * FROM articles WHERE id = ?', (article_id,)).fetchone()
+    conn.close()
+
+    if not article:
+        flash('Article not found.', 'error')
+        return redirect(url_for('home'))
+
+    return render_template('guest_section/view_article.html', article=article)
 
 @app.route('/admin/login', methods=['GET', 'POST'])
 def admin_login():

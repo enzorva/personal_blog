@@ -4,13 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guest Section</title>
+    <title>Entry</title>
     <link rel="stylesheet" href="../static/style.css">
+
 </head>
 
 <body>
-    <div class="tall-box">
-        <div class="title">Personal Blog</div>
+    <div class="tall-box" style="overflow-y: auto; max-height: 90vh;">
+        <div class="entry-title-left">Personal Blog</div>
+        <div style="margin-left: 10px;">
+            {% for article in articles %}
+            <div
+                style="display: flex; align-items: baseline; justify-content: space-between; margin-left: 10px; height: 100%;">
+                <h2 style="margin-bottom: 0;"><button
+                        style="background: none; border: none; color: inherit; font: inherit; cursor: pointer;"
+                        onclick="location.href='{{ url_for('view_article', article_id=article['id']) }}';">{{
+                        article['title'] }}</button></h2>
+                <p style="margin-right: 20px; font-weight: bold; opacity: 0.4;">{{ article['date']|long_date }}</p>
+            </div>
+            {% endfor %}
+        </div>
     </div>
 </body>
 
