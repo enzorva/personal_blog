@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entry</title>
+    <link rel="stylesheet" href="/static/style.css">
+
+</head>
+
+<body>
+    <div class="tall-box">
+        <div class="entry-title-left">Update Article</div>
+
+        <form action="/admin/edit_article/{{ article['id'] }}" method="POST">
+            <div class="form-group">
+                <input type="text" id="article-title" name="article-title" class="textfield" placeholder="Article Title"
+                    maxlength="20" value="{{ article['title'] }}" required>
+            </div>
+
+            <div class="form-group">
+                <input type="date" id="publishing-date" name="publishing-date" class="textfield"
+                    value="{{ article['date'] }}" required>
+            </div>
+
+            <div class="form-group">
+                <textarea id="content" name="content" class="textfield" rows="10" placeholder="Content"
+                    required>{{ article['content'] }}</textarea>
+            </div>
+
+            <button type="submit" class="form-button" style="margin-left: 20px; margin-top: 20px;">Update</button>
+        </form>
+
+    </div>
+</body>
+
+</html>
