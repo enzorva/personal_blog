@@ -1,0 +1,18 @@
+# Ignore Flask session files
+flask_session/
+
+# Python-related ignores
+__pycache__/
+*.pyc
+*.pyo
+
+# Environment files
+.env
+*.env
+
+# Database files
+database.db
+
+# Other
+*.log
+*.sqlite3

@@ -14,6 +14,7 @@
         <div class="entry-title-left">Update Article</div>
 
         <form action="/admin/edit_article/{{ article['id'] }}" method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <div class="form-group">
                 <input type="text" id="article-title" name="article-title" class="textfield" placeholder="Article Title"
                     maxlength="20" value="{{ article['title'] }}" required>

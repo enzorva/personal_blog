@@ -13,6 +13,7 @@
         <div class="entry-title">Personal Blog</div>
 
         <form action="/admin/signup" method="POST" class="form">
+            {{ csrf_token() }}
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" class="textfield" required>
